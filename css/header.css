@@ -1,0 +1,135 @@
+.container--footer {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+@media (min-width: 768px) {
+    .container--footer {
+        max-width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container--footer {
+        max-width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container--footer {
+        max-width: 1170px;
+    }
+}
+
+.header {
+    background-color: var(--main-color);
+    position: relative;
+}
+
+.header .container--footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.logo {
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    height: 72px;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 450px) {
+    .logo {
+        padding-left: 10px;
+    }
+}
+
+.header .main-nav {
+    display: flex;
+}
+
+.header .main-nav>li>a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 72px;
+    color: white;
+    padding: 0 30px;
+    overflow: hidden;
+    font-size: 18px;
+}
+
+@media (min-width: 701px) {
+    .header .main-nav>li>a:hover {
+        color: white;
+        background-color: var(--main-color-alt);
+    }
+}
+
+.login a {
+    background-color: #00437b;
+}
+/*End of header*/
+
+
+.header .menu {
+    font-size: 4.2rem;
+    font-weight: 900;
+    padding: 1rem;
+    color: white;
+}
+
+@media (max-width: 700px) {
+    .header .main-nav {
+        display: none;
+    }
+
+    .header .menu:hover {
+        cursor: pointer;
+    }
+
+    .header .menu.open+ul {
+        padding: 2.4rem 0 2.4rem 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        backdrop-filter: blur(0.5rem);
+        background-color: rgba(0, 22, 41, 0.95);
+        z-index: 100;
+    }
+    
+    .header .main-nav>li>a {
+        text-align: center;
+        height: 60px;
+        color: white;
+        padding: 0 30px;
+        overflow: hidden;
+        font-size: 18px;
+        margin-left: 13px;
+    }
+    
+    .header .main-nav .login {
+        align-self: center;
+        padding: 1.2rem 2.4rem;
+        justify-self: center;
+    }
+
+}
+
+@media (min-width: 701px) {
+    .header .menu {
+        display: none;
+    }
+}

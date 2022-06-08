@@ -1,0 +1,464 @@
+.data--list {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+
+}
+
+.data--list--icon {
+    font-size: 2.8rem;
+    color: #1877f2;
+}
+
+.container {
+    padding: 0 2.4rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/*-------landing-------*/
+
+.landing {
+    text-align: center;
+    padding-top: 8.2rem;
+    /* height: 100vh; */
+}
+
+.name--icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.2rem;
+    color: var(--main-color);
+    font-size: 4.8rem;
+}
+
+.name--icon h3 {
+    display: inline;
+}
+
+.landing .text h3 {
+    font-size: 5.2rem;
+    color: var(--main-color);
+    margin: auto;
+    margin-bottom: 20px;
+    max-width: 50%;
+}
+
+.landing .text h3:hover {
+    color: var(--main-color-alt);
+}
+
+.landing .text p {
+    color: #777;
+    margin-bottom: 6.2rem;
+    font-size: 2.4rem;
+}
+
+.landing .input {
+    padding-left: 10px;
+    margin-bottom: 24.8rem;
+}
+
+.landing input:focus {
+    outline-color: var(--main-color);
+}
+
+.landing input {
+    border: 2px solid rgb(215, 215, 215);
+    padding: 16px 32px;
+    margin: 10px 5px;
+    font-size: 14px;
+}
+
+.landing .input .btn {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    padding: 2rem 6.4rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.landing .input .btn:hover {
+    background-color: var(--main-color-alt);
+    outline: none;
+}
+
+.landing .input .btn {
+    margin-top: 25px;
+}
+
+/*------boxes----------*/
+
+.alldoctors {
+    padding-top: 12.8rem;
+    padding-bottom: 2.4rem;
+    position: relative;
+    background-color: #eee;
+}
+
+.alldoctors .box {
+    width: 100%;
+    padding: 4.6rem 3.8em;
+    background-color: white;
+    position: relative;
+    margin-bottom: 10rem;
+    display: grid;
+    grid-template-columns: 1fr 0.7fr;
+    gap: 6.8rem;
+}
+
+
+.alldoctors .box .col {
+    margin-top: 8.5rem;
+}
+
+.alldoctors .box .col .nam {
+    display: flex;
+}
+
+.alldoctors .box .nam h3 {
+    margin: 20px 25px 30px 0;
+    color: var(--main-color);
+    font-size: 32px;
+}
+
+.alldoctors .box .col .nam i {
+    font-size: 18px;
+    color: var(--main-color);
+    margin: 23px 0 30px;
+}
+
+
+.alldoctors .box img {
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translate(50%, -50%);
+    border: 1.4rem solid #eee;
+    border-radius: 50%;
+    width: 17rem;
+    height: 17rem;
+    -webkit-transform: translate(50%, -50%);
+    -moz-transform: translate(50%, -50%);
+    -ms-transform: translate(50%, -50%);
+    -o-transform: translate(50%, -50%);
+}
+
+
+
+.alldoctors .box .title {
+    width: 100%;
+    color: #777;
+    margin-bottom: 1.2rem;
+    margin-top: 1.8rem;
+    display: block;
+    font-size: 18px;
+}
+
+.alldoctors .box .rate {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-bottom: 2.4rem;
+}
+
+.alldoctors .box .rate .star--icon {
+    width: 2.4rem;
+    height: 2.4rem;
+    stroke: #ffc107;
+}
+
+.alldoctors .box .rate .fill {
+    fill: #ffc107;
+}
+
+.alldoctors .box p {
+    font-size: 2rem;
+    line-height: 1.5;
+    color: #777;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.alldoctors .box ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.6rem;
+}
+
+.alldoctors .box ul li i {
+    font-size: 2.2rem;
+    color: #1877f2;
+}
+
+.appointment {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.time input {
+    padding: 1.8rem 1.4rem;
+    width: 35rem;
+    font-size: 1.6rem;
+    border: 1px solid var(--main-color);
+}
+
+.appointment--container-book {
+    width: 100%;
+    margin-top: 8.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9.6rem;
+}
+
+.appointment--container-book h2,
+.appointment--container-book .time {
+    justify-self: center;
+}
+
+.book--btn {
+    align-self: flex-end;
+}
+
+.appointment h2 {
+    color: #555;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    font-size: 2.9rem;
+}
+
+.alldoctors .col h3 {
+    margin: 0;
+    font-size: 3.2rem;
+    color: #1877f2;
+}
+
+
+.alldoctors .box .btn {
+    background-color: var(--main-color);
+    color: white;
+    padding: 1.6rem;
+    border-radius: 6px;
+    font-size: 1.8rem;
+    border: none;
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+}
+
+
+.alldoctors .box .btn:hover {
+    background-color: var(--main-color-alt);
+    cursor: pointer;
+}
+
+
+/*------------------*/
+/*------------------*/
+
+.popup-overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, .7);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.popup-box {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    padding: 5.2rem;
+    z-index: 2000;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-box h1 {
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 1.8rem;
+    color: var(--main-color);
+}
+
+.popup-box p {
+    color: #777;
+    text-align: center;
+}
+
+
+.popup-box h2 {
+    font-weight: bold;
+    text-align: center;
+    margin: 1.4rem 0 1.4rem;
+    color: var(--main-color);
+}
+
+.popup-box input,
+.popup-box textarea {
+    display: block;
+    padding: 1.2rem 3.2rem;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.popup-box input:focus,
+.popup-box textarea:focus {
+    outline-color: var(--main-color);
+}
+
+.popup-box textarea {
+    padding: 30px 12px;
+}
+
+.popup-box .icon {
+    font-size: 40px;
+    color: var(--main-color);
+    margin-right: 30px;
+    margin-left: 120px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.popup-box .link {
+    font-size: 1.6rem;
+    background-color: var(--main-color);
+    padding: 1.2rem 3.2rem;
+    color: white;
+    text-align: center;
+}
+
+
+.close-button {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background-color: var(--main-color);
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 20px;
+    color: #FFF;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+.popup-box .active2 {
+    border: none;
+    padding: 10px 15px;
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    width: fit-content;
+    width: 100px;
+    border-radius: 30px;
+    margin: auto;
+    cursor: pointer;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+
+.popup-box .active2 .popup-box .active2:hover {
+    cursor: pointer;
+    background-color: var(--main-color-alt);
+}
+
+
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+    html {
+        font-size: 55%;
+    }
+    .landing .text h3 {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 985px) {
+    .alldoctors .box {
+        grid-template-columns: 1fr;
+    }
+
+    .appointment--container-book {
+        margin-top: 0;
+        gap: 3.2rem;
+    }
+
+    .appointment {
+        gap: 3.2rem;
+    }
+
+    .alldoctors .box .btn {
+        width: 35rem;
+        padding: 2.4rem 0;
+    }
+
+    .landing .text h3 {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 530px) {
+    .landing .text h3 {
+        max-width: 100%;
+    }
+
+    html {
+        font-size: 50% !important;
+    }
+
+    .alldoctors .box {
+        padding: 4.8rem 2.4rem;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 45% !important;
+    }
+
+    .alldoctors .col h3,
+    .name--icon i{
+        font-size: 3.2rem;
+    }
+
+    .landing .text h3 {
+        font-size: 4.6rem;
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 390px) {
+    .landing .text h3 {
+        max-width: 100%;
+    }
+
+    html{
+        font-size: 40% !important;
+    }
+}
