@@ -296,6 +296,14 @@
 
     <script src="js/landing.js"></script>
     <script src="js/common.js"></script>
+
+    
+    <script>
+        //min age 18 , max 60
+ document.getElementById("birth-date").max = `${new Date().getFullYear()-18}`+'-01'+'-01';
+ document.getElementById("birth-date").min = `${new Date().getFullYear()-60}`+'-01'+'-01';
+
+    </script>
 </body>
 
 </html>
