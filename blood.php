@@ -25,7 +25,7 @@
             <ion-icon class="menu" name="menu-outline"></ion-icon>
             <ul class="main-nav">
                 <li><a href="./profile.php">Profile</a></li>
-                <li><a href="./reservations.php">Reservations</a></li>
+                <li class="active4"><a href="#doctor">Be donor</a></li>
                 <li class="active"><a href="">Contact Us</a></li>
             </ul>
         </div>
