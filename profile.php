@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+include('config.php');
+if (isset($_SESSION['mail'])) {
+    $mail = $_SESSION['mail'];
+    $select = "SELECT * FROM`users` WHERE `mail`='$mail'";
+    $run = mysqli_query($conn, $select);
+    $arr = mysqli_fetch_array($run);
+    $userId = $arr['id'];
+    $img = $arr['image'];
+    ?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,7 +43,7 @@
 
             <div class="img-container">
                 
-                <img src="images/dave.jpg" alt="User profile image.">
+                <img src="images/<?php echo $img; ?>" alt="User profile image.">
 
                 <label for="edit-img" class="edit-icon-container">
                     <svg xmlns="http://www.w3.org/2000/svg" class=" user-data-icon edit-icon" viewBox="0 0 20 20" fill="currentColor">
@@ -47,7 +56,7 @@
             </div>
 
             <p class="user-name">
-                Ali Mahmoud
+                <?php echo $arr['name']; ?>
             </p>
 
             <a class="btn manage" href="manage-profile.php">Manage Profile</a>
@@ -58,14 +67,14 @@
                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                     </svg>
-                    <p>aliMahmoud2531@gmail.com</p>
+                    <p><?php echo $arr['mail']; ?></p>
                 </li>
                 <li class="user-data">
                     <svg xmlns="http://www.w3.org/2000/svg" class="user-data-icon" viewBox="0 0 20 20" fill="currentColor">
                         <path
                             d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                     </svg>
-                    <p>+201116763825</p>
+                    <p><?php echo $arr['mobile']; ?></p>
                 </li>
                 <li class="user-data">
                     <svg xmlns="http://www.w3.org/2000/svg" class="user-data-icon" viewBox="0 0 20 20" fill="currentColor">
@@ -73,16 +82,9 @@
                             d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                             clip-rule="evenodd" />
                     </svg>
-                    <p>Giza, Egypt</p>
+                    <p><?php echo $arr['city']; ?>, Egypt</p>
                 </li>
-                <li class="user-data">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="user-data-icon" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M6 3a1 1 0 011-1h.01a1 1 0 010 2H7a1 1 0 01-1-1zm2 3a1 1 0 00-2 0v1a2 2 0 00-2 2v1a2 2 0 00-2 2v.683a3.7 3.7 0 011.055.485 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0A3.7 3.7 0 0118 12.683V12a2 2 0 00-2-2V9a2 2 0 00-2-2V6a1 1 0 10-2 0v1h-1V6a1 1 0 10-2 0v1H8V6zm10 8.868a3.704 3.704 0 01-4.055-.036 1.704 1.704 0 00-1.89 0 3.704 3.704 0 01-4.11 0 1.704 1.704 0 00-1.89 0A3.704 3.704 0 012 14.868V17a1 1 0 001 1h14a1 1 0 001-1v-2.132zM9 3a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm3 0a1 1 0 011-1h.01a1 1 0 110 2H13a1 1 0 01-1-1z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <p>Jan 25, 2000</p>
-                </li>
+                
                 <li class="user-data">
 
                 </li>
@@ -170,3 +172,9 @@
 </body>
 
 </html>
+<?php
+} else {
+    echo "you have to login first";
+    header("refresh:5,url=login.php");
+}
+?>

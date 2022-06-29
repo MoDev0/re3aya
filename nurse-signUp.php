@@ -66,7 +66,7 @@
         if(mysqli_query($conn,$sql)){
         $_SESSION['mail']=$mail;
         echo"Welcome";
-        // header("refresh:4,url=index.php");
+         header("refresh:4,url=login.php");
         } 
         else{
           echo "something went wrong" ;

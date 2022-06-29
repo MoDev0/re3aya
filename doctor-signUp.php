@@ -55,7 +55,7 @@
     }
     
     move_uploaded_file($_FILES['photo']['tmp_name'],$target_dir.$fileName);
-    $select="SELECT * FROM`users`WHERE `mail`='$mail'";
+    $select="SELECT * FROM`Doctor`WHERE `mail`='$mail'";
         $run=mysqli_query($conn,$select);
         $nums=mysqli_num_rows($run);
         if($nums>0){
@@ -67,7 +67,7 @@
     if(mysqli_query($conn,$sql)){
     $_SESSION['mail']=$mail;
     echo"Welcome";
-    header("refresh:4,url=index.php");
+    header("refresh:4,url=login.php");
     } 
     else{
       echo "something went wrong" ;

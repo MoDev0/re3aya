@@ -63,9 +63,9 @@
             if(count($error)==0){
         $sql="INSERT INTO `users` (`name`,`mobile`,`mail`,`birth`,`gender`,`city`,`area`,`image`,`pass`,`type`) VALUES('$name','$phone','$mail','$date','$gender','$city','$area','".$fileName."','$pass','user')";
         if(mysqli_query($conn,$sql)){
-        $_SESSION['mail']=$mail;
+        
         echo"Welcome";
-        header("refresh:4,url=index.php");
+        header("refresh:4,url=login.php");
         } 
         else{
           echo "something went wrong" ;
@@ -109,7 +109,7 @@
                 Sign Up
             </p>
 
-            <form class="edit-data-form" method="POST" enctype="multipart/form-data">
+            <form class="edit-data-form" action="signup.php" method="POST" enctype="multipart/form-data">
 
                 <div class="field-container">
                     <label class="label" for="user-name">Your Name</label>

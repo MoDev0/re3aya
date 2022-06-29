@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+include('config.php');
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,21 +40,21 @@
                 Login
             </p>
 
-            <form class="edit-data-form" action="#">
+            <form class="edit-data-form" method="POST" action="login.php">
 
                 <div class="field-container">
                     <label class="label" for="email">Email Address</label>
-                    <input class="input-field" type="email" id="email" required>
+                    <input class="input-field" type="email" name="mail" id="email" required>
                 </div>
                 
                 <div class="field-container">
                     <label class="label" for="password">Password</label>
-                    <input class="input-field" type="password" id="password" required>
+                    <input class="input-field" type="password" name="pass" id="password" required>
                 </div>
 
                 <div class="btns-container">
                     <div class="btns">
-                        <button type="submit" class="btn login">Login</button>
+                        <button type="submit"  name="next" class="btn login">Login</button>
                         <a class="create--account-or--login" href="./signup.php">Create account</a>
                     </div>
                 </div>
@@ -137,3 +139,37 @@
 </body>
 
 </html>
+<?php
+if(isset($_POST['next'])){
+$mail=$conn->real_escape_string($_POST["mail"]);
+$pass=$conn->real_escape_string($_POST["pass"]);
+if(empty($mail)){
+    array_push($error,"mail is needed");
+}if(empty($pass)){
+    array_push($error,"password is needed");
+}
+$select="SELECT * FROM`users`WHERE `mail`='$mail'AND `pass`='$pass'";
+            $run=mysqli_query($conn,$select);
+            $nums=mysqli_num_rows($run);
+            if($nums==0){
+array_push($error,"Email or Passowrd not found");
+foreach($error as $er){
+    echo "<h2>$er</h2>";
+}
+            }else{
+                if(count($error)==0){
+                    $_SESSION['mail']=$mail;
+                    echo"Welcome $mail";
+
+                    header("refresh:2,url=index.php");
+                    ob_end_flush();
+
+                }
+                else{
+                    echo "something went wromg";
+                }
+            }
+
+
+}
+?>
