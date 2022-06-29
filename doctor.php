@@ -2,6 +2,38 @@
 <html lang="en">
 <?php
 include('config.php');
+
+function filter_doctor() {
+    $city=$_POST["city"];
+    $area=$_POST["area"];
+    $doctor=$_POST["doctor"];
+    $Speciality=$_POST["Speciality"];
+    
+        $query = "SELECT * FROM `doctor`";
+        $conditions = array();
+    
+        if(! empty($city)) {
+          $conditions[] = "`city`='$city'";
+        }
+        if(! empty($area)) {
+          $conditions[] = "`area`='$area'";
+        }
+        if(! empty($Speciality)) {
+          $conditions[] = "`Speciality`='$Speciality'";
+        }
+        if(! empty($doctor)) {
+          $conditions[] = "`name`='$doctor'";
+        }
+    
+        $sql = $query;
+        if (count($conditions) > 0) {
+          $sql .= " WHERE " . implode(' AND ', $conditions);
+        }
+        
+        
+
+        return $sql;
+    }
 ?>
 <head>
     <meta charset="UTF-8">
@@ -41,9 +73,9 @@ include('config.php');
                 <p>Find, book and add your favourite practitioners to your care team.</p>
             </div>
             <div class="input">
-                <form>
+                <form method="POST">
                     <!-- <span>Speciality</span> -->
-                    <input list="speciality" placeholder="Choose Speciality">
+                    <input name="Speciality" list="speciality" placeholder="Choose Speciality">
                     <datalist id="speciality">
                         <option value="Diagnostic radiology">
                         <option value="Dermatology">
@@ -68,13 +100,13 @@ include('config.php');
                     </datalist>
 
                     <!-- <span>City</span> -->
-                    <input list="city" placeholder="Choose City">
+                    <input name="city" list="city" placeholder="Choose City">
                     <datalist id="city">
                         <option value="Cairo">
                         <option value="Giza">
                     </datalist>
                     <!-- <span>Area</span> -->
-                    <input list="area" placeholder="Choose Area">
+                    <input name="area" list="area" placeholder="Choose Area">
                     <datalist id="area">
                         <div class="cairo">
                             <option value="El Zamalek">
@@ -112,9 +144,9 @@ include('config.php');
 
                     </datalist>
                     <label for="docname"></label>
-                    <input type="text" placeholder="Doctor Name" id="docname">
+                    <input name="doctor" type="text" placeholder="Doctor Name" id="docname">
 
-                    <button class="btn">Search</button>
+                    <button type="submit" name="submit" class="btn">Search</button>
                 </form>
             </div>
         </div>
@@ -124,8 +156,21 @@ include('config.php');
     <div class="alldoctors" id="alldoctors">
         <div class="container">
              <?php
-$select="SELECT * FROM `Doctor`";
-$run=mysqli_query($conn,$select);
+           
+         
+      if(isset($_POST['submit'])){     
+       $sql=filter_doctor();
+       
+    
+
+
+       $run=mysqli_query($conn,$sql);
+
+      }
+      else{
+        $select="SELECT * FROM `doctor`";
+        $run=mysqli_query($conn,$select);
+      }
 foreach($run as $row){
              ?>
 
