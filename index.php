@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+include('config.php');
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,7 +38,15 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#contact">Contact Us</a></li>
-                <li class="login"><a href="login.php">Login</a></li>
+                <?php
+                if (isset($_SESSION['mail'])) {?>
+                    <li class="login"><a href="logout.php">Logout</a></li>
+                <?php } else{?>
+                    <li class="login"><a href="signup.php">Sign up</a></li>
+                    <li class="login"><a href="login.php">Login</a></li>
+                <?php } ?>
+                
+                
             </ul>
         </div>
     </div>
@@ -109,6 +119,17 @@
                     <div class="text">
                         <h3 class="service-title">Telehealth</h3>
                         <p class="service-description">Communicate with doctors with various specialities by a video call</p>
+                    </div>
+
+                </div>
+
+                <div class="box" onclick="window.location='./SampleAvatar/index.php';">
+
+                    <ion-icon class="services--icon" name="videocam-outline"></ion-icon>
+
+                    <div class="text">
+                        <h3 class="service-title">AI</h3>
+                        <p class="service-description">use our AI-based model to get initial diagnosis</p>
                     </div>
 
                 </div>
