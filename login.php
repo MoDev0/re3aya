@@ -2,6 +2,7 @@
 <html lang="en">
 <?php
 include('config.php');
+ob_start();
 ?>
 <head>
     <meta charset="UTF-8">

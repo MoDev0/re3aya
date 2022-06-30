@@ -2,6 +2,8 @@
 <html lang="en">
 <?php
 include('config.php');
+ob_start();
+error_reporting(E_ERROR | E_PARSE);
 if (isset($_SESSION['mail'])) {
     $mail = $_SESSION['mail'];
     $select = "SELECT * FROM`users` WHERE `mail`='$mail'";
@@ -16,6 +18,8 @@ if (isset($_SESSION['mail'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/nurse_login_signup.css" />
+
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/header.css">
@@ -94,13 +98,48 @@ if (isset($_SESSION['mail'])) {
 
                 <a class="btn reser" href="reservations.php">Reservations</a>
 
-                <a class="btn donor" href="./blood.php">Be donor</a>
+               
 
             </div>
+            <?php
+                 $type=$_POST['type'];
+                 $sel="SELECT * FROM `donor` WHERE `uid`=$userId";
+                 $runsel=mysqli_query($conn,$sel);
+                 $count=mysqli_num_rows($runsel);
+                 if($count>0){
+                    echo "you are a blood donor";}
+           
+            
+
+                    else{ ?>
+                    <form  method="POST">
+    <div class="btn-container">
+            <div class="field-container">
+                    <label class="label" for="blood-type">Your blood type</label>
+                    <input class="input-field" type="text" id="user-name" name="type" required>
+                </div>
+            <button class="btn donor" type="submit" name="submit">Be donor</button>
+</div>
+</form>
+<?php }?>
 
         </div>
     </div>
-
+        <?php
+            if(isset($_POST['submit'])){
+                $type=$_POST['type'];
+                $insert="INSERT INTO `donor` (`uid`,`btype`) VALUES ('$userId','$type')";
+                
+                $runi=mysqli_query($conn,$insert);
+                if($runi){
+                    echo "you are now one of blood donators, Thank you";
+                    header("refresh:2,url=blood.php");
+                }
+                else{
+                    echo "something went wrong";
+                }
+            }
+        ?>
 
 
      <!-- Footer -->

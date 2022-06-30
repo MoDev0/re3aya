@@ -1,4 +1,37 @@
 <!DOCTYPE html>
+<?php
+include('config.php');
+//error_reporting(E_ERROR | E_PARSE);
+
+function filter_donor() {
+    $city=$_POST["city"];
+    $type=$_POST["type"];
+    
+    
+        $query = "SELECT donor.btype, users.*   
+        FROM users  
+        INNER JOIN donor";
+        $conditions = array();
+    
+        if(! empty($city)) {
+          $conditions[] = "`city`='$city'";
+        }
+        if(! empty($type)) {
+          $conditions[] = "`btype`='$type'";
+        }
+        
+    
+        $sql = $query;
+        if (count($conditions) > 0) {
+          $sql .= " ON " . implode(' AND ', $conditions);
+          $sql .= " AND donor.uid=users.id";
+        }
+        
+        
+    
+        return $sql;
+    }
+?>
 <html lang="en">
 
 <head>
@@ -38,9 +71,9 @@
                 <p>Register to be a blood donor, give blood and save lives.</p>
             </div>
             <div class="input">
-                <form>
+                <form method="POST">
                     <!-- <span>City</span> -->
-                    <input class="input--location" list="city" placeholder="Choose City">
+                    <input name="city" class="input--location" list="city" placeholder="Choose City">
                     <datalist id="city">
                         <option value="Cairo">
                         <option value="Giza">
@@ -72,7 +105,7 @@
                     </datalist>
 
 
-                    <input class="input--blood-type" list="blood" placeholder="Blood Type">
+                    <input name="type" class="input--blood-type" list="blood" placeholder="Blood Type">
                     <datalist id="blood">
                         <option value="A+">
                         <option value="A-">
@@ -84,7 +117,7 @@
                         <option value="O-">
                     </datalist>
 
-                    <button class="btn">Search</button>
+                    <button type="submit" name="submit" class="btn">Search</button>
                 </form>
             </div>
         </div>
@@ -93,178 +126,58 @@
 
     <div class="donation" id="donation">
         <div class="container">
+            <?php
+            if(isset($_POST['submit'])){
+                $selec=filter_donor();
+                $run=mysqli_query($conn,$selec);
+            }
+            else{
+               $select="SELECT donor.btype, users.*   
+                FROM users  
+                INNER JOIN donor
+                ON donor.uid=users.id"; 
+                $run=mysqli_query($conn,$select);
+            }
+                foreach($run as $row){
+            ?>
+            <div class="box">
+                <img src="images/<?php echo$row['image'];?>" alt="" />
+                <div class="nam">
+                    <h3><?php echo$row['name']; ?></h3>
+                    <ion-icon class="donation--help--icon" name="heart-half-outline"></ion-icon>
+                    <!-- <i class="fa-solid fa-hand-holding-medical"></i> -->
+                </div>
+                <ul class="doctor--book-info">
+                    <li>
+                        <!-- <i class='fas fa-burn'></i> -->
+                        <ion-icon class="donation--icon" name="water-outline"></ion-icon>
+                        <p>Blood Type <span>(<?php echo$row['btype']; ?>)</span></p>
+                    </li>
+                    
+                    <li>
+                        <!-- <i class='fas fa-map-marker-alt'></i> -->
+                        <ion-icon class="donation--icon" name="location-outline"></ion-icon>
+                        <p><span><?php echo$row['area']; ?></span></p>
+                    </li>
+                    
+                    <li>
+                        <!-- <i class="fa fa-phone"></i> -->
+                        <ion-icon class="donation--icon" name="call-outline"></ion-icon>
+                        <p><span><?php echo$row['mobile']; ?></span></p>
+                    </li>
+                </ul>
+                <div class="chaticon">
+                    <a href="">
+                        <h4>Contact with me</h4>
+                        <ion-icon class="donation--chat--icon" name="chatbubble-ellipses-outline"></ion-icon>
+                        <!-- <i class='far fa-comment-dots chat'></i> -->
+                    </a>
+                </div>
+            </div>
+<?php
+                }
+?>
             
-            <div class="box">
-                <img src="images/customer-5.jpg" alt="" />
-                <div class="nam">
-                    <h3>Amr Hendawy</h3>
-                    <ion-icon class="donation--help--icon" name="heart-half-outline"></ion-icon>
-                    <!-- <i class="fa-solid fa-hand-holding-medical"></i> -->
-                </div>
-                <ul class="doctor--book-info">
-                    <li>
-                        <!-- <i class='fas fa-burn'></i> -->
-                        <ion-icon class="donation--icon" name="water-outline"></ion-icon>
-                        <p>Blood Type <span>(B)</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-child"></i> -->
-                        <ion-icon class="donation--icon" name="man-outline"></ion-icon>
-                        <p class="active1"><span>22</span> Years old</p>
-                    </li>
-                    <li>
-                        <!-- <i class='fas fa-map-marker-alt'></i> -->
-                        <ion-icon class="donation--icon" name="location-outline"></ion-icon>
-                        <p><span>El-Dokki</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-dollar"></i> -->
-                        <ion-icon class="donation--icon" name="pricetags-outline"></ion-icon>
-                        <p>Fees : <span>300 EGP</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-phone"></i> -->
-                        <ion-icon class="donation--icon" name="call-outline"></ion-icon>
-                        <p><span>01157082417</span></p>
-                    </li>
-                </ul>
-                <div class="chaticon">
-                    <a href="">
-                        <h4>Contact with me</h4>
-                        <ion-icon class="donation--chat--icon" name="chatbubble-ellipses-outline"></ion-icon>
-                        <!-- <i class='far fa-comment-dots chat'></i> -->
-                    </a>
-                </div>
-            </div>
-
-            <div class="box">
-                <img src="images/ben.jpg" alt="" />
-                <div class="nam">
-                    <h3>Amr Hendawy</h3>
-                    <ion-icon class="donation--help--icon" name="heart-half-outline"></ion-icon>
-                    <!-- <i class="fa-solid fa-hand-holding-medical"></i> -->
-                </div>
-                <ul class="doctor--book-info">
-                    <li>
-                        <!-- <i class='fas fa-burn'></i> -->
-                        <ion-icon class="donation--icon" name="water-outline"></ion-icon>
-                        <p>Blood Type <span>(B)</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-child"></i> -->
-                        <ion-icon class="donation--icon" name="man-outline"></ion-icon>
-                        <p class="active1"><span>22</span> Years old</p>
-                    </li>
-                    <li>
-                        <!-- <i class='fas fa-map-marker-alt'></i> -->
-                        <ion-icon class="donation--icon" name="location-outline"></ion-icon>
-                        <p><span>El-Dokki</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-dollar"></i> -->
-                        <ion-icon class="donation--icon" name="pricetags-outline"></ion-icon>
-                        <p>Fees : <span>300 EGP</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-phone"></i> -->
-                        <ion-icon class="donation--icon" name="call-outline"></ion-icon>
-                        <p><span>01157082417</span></p>
-                    </li>
-                </ul>
-                <div class="chaticon">
-                    <a href="">
-                        <h4>Contact with me</h4>
-                        <ion-icon class="donation--chat--icon" name="chatbubble-ellipses-outline"></ion-icon>
-                        <!-- <i class='far fa-comment-dots chat'></i> -->
-                    </a>
-                </div>
-            </div>
-
-            <div class="box">
-                <img src="images/dave.jpg" alt="" />
-                <div class="nam">
-                    <h3>Amr Hendawy</h3>
-                    <ion-icon class="donation--help--icon" name="heart-half-outline"></ion-icon>
-                    <!-- <i class="fa-solid fa-hand-holding-medical"></i> -->
-                </div>
-                <ul class="doctor--book-info">
-                    <li>
-                        <!-- <i class='fas fa-burn'></i> -->
-                        <ion-icon class="donation--icon" name="water-outline"></ion-icon>
-                        <p>Blood Type <span>(B)</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-child"></i> -->
-                        <ion-icon class="donation--icon" name="man-outline"></ion-icon>
-                        <p class="active1"><span>22</span> Years old</p>
-                    </li>
-                    <li>
-                        <!-- <i class='fas fa-map-marker-alt'></i> -->
-                        <ion-icon class="donation--icon" name="location-outline"></ion-icon>
-                        <p><span>El-Dokki</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-dollar"></i> -->
-                        <ion-icon class="donation--icon" name="pricetags-outline"></ion-icon>
-                        <p>Fees : <span>300 EGP</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-phone"></i> -->
-                        <ion-icon class="donation--icon" name="call-outline"></ion-icon>
-                        <p><span>01157082417</span></p>
-                    </li>
-                </ul>
-                <div class="chaticon">
-                    <a href="">
-                        <h4>Contact with me</h4>
-                        <ion-icon class="donation--chat--icon" name="chatbubble-ellipses-outline"></ion-icon>
-                        <!-- <i class='far fa-comment-dots chat'></i> -->
-                    </a>
-                </div>
-            </div>
-
-            <div class="box">
-                <img src="images/86.jpg" alt="" />
-                <div class="nam">
-                    <h3>Amr Hendawy</h3>
-                    <ion-icon class="donation--help--icon" name="heart-half-outline"></ion-icon>
-                    <!-- <i class="fa-solid fa-hand-holding-medical"></i> -->
-                </div>
-                <ul class="doctor--book-info">
-                    <li>
-                        <!-- <i class='fas fa-burn'></i> -->
-                        <ion-icon class="donation--icon" name="water-outline"></ion-icon>
-                        <p>Blood Type <span>(B)</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-child"></i> -->
-                        <ion-icon class="donation--icon" name="man-outline"></ion-icon>
-                        <p class="active1"><span>22</span> Years old</p>
-                    </li>
-                    <li>
-                        <!-- <i class='fas fa-map-marker-alt'></i> -->
-                        <ion-icon class="donation--icon" name="location-outline"></ion-icon>
-                        <p><span>El-Dokki</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-dollar"></i> -->
-                        <ion-icon class="donation--icon" name="pricetags-outline"></ion-icon>
-                        <p>Fees : <span>300 EGP</span></p>
-                    </li>
-                    <li>
-                        <!-- <i class="fa fa-phone"></i> -->
-                        <ion-icon class="donation--icon" name="call-outline"></ion-icon>
-                        <p><span>01157082417</span></p>
-                    </li>
-                </ul>
-                <div class="chaticon">
-                    <a href="">
-                        <h4>Contact with me</h4>
-                        <ion-icon class="donation--chat--icon" name="chatbubble-ellipses-outline"></ion-icon>
-                        <!-- <i class='far fa-comment-dots chat'></i> -->
-                    </a>
-                </div>
-            </div>
 
         </div>
     </div>
